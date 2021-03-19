@@ -3,16 +3,14 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\UsersRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Repository\UtilisateursRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ApiResource()
- * @ORM\Entity(repositoryClass=UsersRepository::class)
+ * @ORM\Entity(repositoryClass=UtilisateursRepository::class)
  */
-class Users
+class Utilisateurs
 {
     /**
      * @ORM\Id
@@ -35,16 +33,6 @@ class Users
      * @ORM\Column(type="string", length=255)
      */
     private $email;
-
-    /**
-     * @ORM\OneToMany(targetEntity=produits::class, mappedBy="commande")
-     */
-    private $commande;
-
-    public function __construct()
-    {
-        $this->commande = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -83,36 +71,6 @@ class Users
     public function setEmail(string $email): self
     {
         $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|produits[]
-     */
-    public function getCommande(): Collection
-    {
-        return $this->commande;
-    }
-
-    public function addCommande(produits $commande): self
-    {
-        if (!$this->commande->contains($commande)) {
-            $this->commande[] = $commande;
-            $commande->setCommande($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCommande(produits $commande): self
-    {
-        if ($this->commande->removeElement($commande)) {
-            // set the owning side to null (unless already changed)
-            if ($commande->getCommande() === $this) {
-                $commande->setCommande(null);
-            }
-        }
 
         return $this;
     }

@@ -3,14 +3,14 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\TypeProduitRepository;
+use App\Repository\GenreRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ApiResource()
- * @ORM\Entity(repositoryClass=TypeProduitRepository::class)
+ * @ORM\Entity(repositoryClass=GenreRepository::class)
  */
-class TypeProduit
+class Genre
 {
     /**
      * @ORM\Id
@@ -20,7 +20,7 @@ class TypeProduit
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      */
     private $badge;
 
@@ -39,12 +39,12 @@ class TypeProduit
         return $this->id;
     }
 
-    public function getBadge(): ?int
+    public function getBadge(): ?string
     {
         return $this->badge;
     }
 
-    public function setBadge(int $badge): self
+    public function setBadge(string $badge): self
     {
         $this->badge = $badge;
 
