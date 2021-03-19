@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 class ApiShopController extends AbstractController
 {
     /**
@@ -13,10 +14,10 @@ class ApiShopController extends AbstractController
      */
     public function index(): response
     {
-        $json = json_encode([
-            "text" => "ceci est un paragraphe",
-            "name" => "mike"
-        ]);
+
+        $json = json_encode(
+            "text",
+        );
 
 
         return  $this->json($json, 200, []);
