@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\UtilisateursRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -41,6 +43,22 @@ class Utilisateurs implements UserInterface
      * @Assert\Email()
      */
     private $email;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Commande::class, mappedBy="utilisateurs")
+     */
+    private $commandes;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Role::class, inversedBy="utilisateurs")
+     */
+    private $roles;
+
+    public function __construct()
+    {
+        $this->commandes = new ArrayCollection();
+        $this->roles = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -97,5 +115,51 @@ class Utilisateurs implements UserInterface
     }
     public function getUsername()
     {
+    }
+
+    /**
+     * @return Collection|Commande[]
+     */
+    public function getCommandes(): Collection
+    {
+        return $this->commandes;
+    }
+
+    public function addCommande(Commande $commande): self
+    {
+        if (!$this->commandes->contains($commande)) {
+            $this->commandes[] = $commande;
+            $commande->setUtilisateurs($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommande(Commande $commande): self
+    {
+        if ($this->commandes->removeElement($commande)) {
+            // set the owning side to null (unless already changed)
+            if ($commande->getUtilisateurs() === $this) {
+                $commande->setUtilisateurs(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function addRole(Role $role): self
+    {
+        if (!$this->roles->contains($role)) {
+            $this->roles[] = $role;
+        }
+
+        return $this;
+    }
+
+    public function removeRole(Role $role): self
+    {
+        $this->roles->removeElement($role);
+
+        return $this;
     }
 }
