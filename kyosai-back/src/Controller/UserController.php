@@ -28,6 +28,7 @@ class UserController extends AbstractController
         $manager->persist($user);
         $manager->flush();
 
+
         return $this->json($body["firstname"]);
     }
 }
