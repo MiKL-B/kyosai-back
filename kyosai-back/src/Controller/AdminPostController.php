@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
+
 use App\Entity\Produits;
-use App\Form\RegistrationType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,6 +22,7 @@ class AdminPostController extends AbstractController
         $produit->setNom($body["name_produit"]);
         $produit->setPrix($body["prix_produit"]);
         $produit->setImage($body["image_produit"]);
+        //$produit->setCreatedAt($body["date_produit"]);
         $manager->persist($produit);
         $manager->flush();
         return $this->json($body["name_produit"]);
