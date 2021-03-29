@@ -18,7 +18,7 @@ security:
             anonymous: true
             lazy: true
             provider: in_database
-
+    
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
