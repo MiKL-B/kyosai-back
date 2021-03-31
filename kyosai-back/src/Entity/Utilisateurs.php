@@ -17,7 +17,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @UniqueEntity(
  *     fields={"email"},
  *     errorPath="email",
- *     message="This email is already in use on that host."
+ *     message="Cet email existe deja"
  * )
  */
 class Utilisateurs implements UserInterface
@@ -164,5 +164,4 @@ class Utilisateurs implements UserInterface
 
         return $this;
     }
-  
 }
