@@ -27,11 +27,11 @@ class AdminPostController extends AbstractController
         $produit->setPrix($body["prix_produit"]);
         $produit->setImage($body["image_produit"]);
         // $produit->setCreatedAt($body["date_produit"]);
-        $category->setLabel($body["category_produit"]);
+        // $category->setLabel($body["category_produit"]);
 
-        $manager->persist($category);
-        $persistedCategory = $categoryRepository->findOneByLabel($body["category_produit"]);
-        $produit->addCategory($persistedCategory);
+        //$manager->persist($category);
+        // $persistedCategory = $categoryRepository->findOneByLabel($body["category_produit"]);
+        // $produit->addCategory($persistedCategory);
         $manager->persist($produit);
         $manager->flush();
 
