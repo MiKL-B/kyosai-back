@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Entity\Produits;
 use App\Repository\CategoryRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,12 +27,14 @@ class AdminPostController extends AbstractController
         $produit->setNom($body["name_produit"]);
         $produit->setPrix($body["prix_produit"]);
         $produit->setImage($body["image_produit"]);
+        $produit->setCreatedAt(new DateTime());
         // $produit->setCreatedAt($body["date_produit"]);
         // $category->setLabel($body["category_produit"]);
 
-        //$manager->persist($category);
+
         // $persistedCategory = $categoryRepository->findOneByLabel($body["category_produit"]);
-        // $produit->addCategory($persistedCategory);
+        // $produit->addCategory($body['category_produit']);
+        //$manager->persist($category);
         $manager->persist($produit);
         $manager->flush();
 
