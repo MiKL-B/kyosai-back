@@ -42,7 +42,6 @@ class Utilisateurs implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Email
-     * @Assert\Unique
      */
     private $email;
 
