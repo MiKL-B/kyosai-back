@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Entity\Produits;
 use App\Repository\CategoryRepository;
+use App\Repository\ProduitsRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,21 +23,23 @@ class AdminPostController extends AbstractController
     public function index(Request $request, EntityManagerInterface $manager, CategoryRepository $categoryRepository): Response
     {
         $produit = new Produits();
-        $category = new Category();
         $body = json_decode($request->getContent(), true);
         $produit->setNom($body["name_produit"]);
         $produit->setPrix($body["prix_produit"]);
         $produit->setImage($body["image_produit"]);
         $produit->setCreatedAt(new DateTime());
-
-        //$category->setLabel($body["category_produit"]);
-
         $persistedCategory = $categoryRepository->findOneBy(['label' => $body["category_produit"]]);
-        var_dump($body["category_produit"]);
         $produit->addCategory($persistedCategory);
         $manager->persist($produit);
         $manager->flush();
 
         return $this->json($produit);
+    }
+    /**
+     * @Route("/api/admin/edit/{id}", name="api_admin_edit")
+     */
+    public function edit(int $id, ProduitsRepository $produit)
+    {
+        return $this->json($produit->find($id));
     }
 }
