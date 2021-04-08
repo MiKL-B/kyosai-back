@@ -36,11 +36,7 @@ class AdminEditPostController extends AbstractController
         $produit->find($id)->setImage($body['image_produit']);
         $produit->find($id)->setCreatedAt(new DateTime());
         $persistedCategory = $categoryRepository->findOneBy(['label' => $body["category_produit"]]);
-
-
         $produit->find($id)->addCategory($persistedCategory);
-
-
         $manager->flush();
 
         return $this->json($produit->find($id));
