@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
+use DateTime;
+use App\Repository\CategoryRepository;
 use App\Repository\ProduitsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminEditPostController extends AbstractController
@@ -22,18 +25,24 @@ class AdminEditPostController extends AbstractController
     /**
      * @Route("/api/admin/edit/{id}", name="api_admin_edit", methods={"POST","GET"})
      */
-    public function edit(int $id, ProduitsRepository $produit, Request $request, EntityManagerInterface $manager)
+    public function edit(int $id, ProduitsRepository $produit, Request $request, EntityManagerInterface $manager, CategoryRepository $categoryRepository)
     {
 
         $body = json_decode($request->getContent(), true);
 
 
         $produit->find($id)->setNom($body['name_produit']);
-        $manager->flush();
-        return $this->json($produit->find($id));
-        // $produit->find($id)->setPrix($body['prix_produit']);
-        // $produit->find($id)->setImage($body['image_produit']);
-        // $produit->find($id)->setCreatedAt(new DateTime());
+        $produit->find($id)->setPrix($body['prix_produit']);
+        $produit->find($id)->setImage($body['image_produit']);
+        $produit->find($id)->setCreatedAt(new DateTime());
+        $persistedCategory = $categoryRepository->findOneBy(['label' => $body["category_produit"]]);
 
+
+        $produit->find($id)->addCategory($persistedCategory);
+
+
+        $manager->flush();
+
+        return $this->json($produit->find($id));
     }
 }
