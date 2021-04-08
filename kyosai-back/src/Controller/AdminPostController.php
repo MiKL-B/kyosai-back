@@ -35,11 +35,5 @@ class AdminPostController extends AbstractController
 
         return $this->json($produit);
     }
-    /**
-     * @Route("/api/admin/edit/{id}", name="api_admin_edit", methods={"POST","GET"})
-     */
-    public function edit(int $id, ProduitsRepository $produit, Request $request)
-    {
-        return $this->json($produit->find($id));
-    }
+ 
 }
