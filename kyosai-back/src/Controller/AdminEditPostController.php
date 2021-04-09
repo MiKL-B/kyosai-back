@@ -5,7 +5,6 @@ namespace App\Controller;
 use DateTime;
 use App\Repository\CategoryRepository;
 use App\Repository\ProduitsRepository;
-
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,7 +28,6 @@ class AdminEditPostController extends AbstractController
     {
 
         $body = json_decode($request->getContent(), true);
-
 
         $produit->find($id)->setNom($body['name_produit']);
         $produit->find($id)->setPrix($body['prix_produit']);
