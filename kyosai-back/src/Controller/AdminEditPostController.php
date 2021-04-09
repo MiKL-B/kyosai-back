@@ -3,14 +3,13 @@
 namespace App\Controller;
 
 use DateTime;
-use App\Entity\Produits;
 use App\Repository\CategoryRepository;
 use App\Repository\ProduitsRepository;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminEditPostController extends AbstractController
@@ -42,5 +41,13 @@ class AdminEditPostController extends AbstractController
 
         return $this->json($produit->find($id));
     }
-   
+    /**
+     * @Route("/api/admin/delete/{id}", name="api_admin_delete", methods={"POST","GET"} )
+     */
+    public function delete(int $id, ProduitsRepository $produit, EntityManagerInterface $manager)
+    {
+        $manager->remove($produit->find($id));
+        $manager->flush();
+        return new Response('Le produit a bien été supprimé');
+    }
 }
