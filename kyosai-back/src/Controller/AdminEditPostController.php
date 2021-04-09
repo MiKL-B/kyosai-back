@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use DateTime;
+use App\Entity\Produits;
 use App\Repository\CategoryRepository;
 use App\Repository\ProduitsRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,7 +19,7 @@ class AdminEditPostController extends AbstractController
     /**
      * @Route("/api/admin/edit/view/{id}", name="api_admin_edit_view", methods={"POST","GET"})
      */
-    public function getEditContent(int $id, ProduitsRepository $produit, Request $request, EntityManagerInterface $manager)
+    public function getEditContent(int $id, ProduitsRepository $produit)
     {
         return $this->json($produit->find($id));
     }
@@ -41,4 +42,5 @@ class AdminEditPostController extends AbstractController
 
         return $this->json($produit->find($id));
     }
+   
 }
