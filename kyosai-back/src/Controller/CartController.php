@@ -17,6 +17,7 @@ class CartController extends AbstractController
     {
 
         $panier = $session->get('panier', []);
+
         $panierWithData = [];
         $total = 0;
 
@@ -30,10 +31,10 @@ class CartController extends AbstractController
             $total += $produit->getPrix() * $quantity;
         };
 
-
         return $this->json([
             'panierWithData' => $panierWithData,
-            'total' => $total
+            'total' => $total,
+
         ]);
     }
     /**
@@ -44,7 +45,6 @@ class CartController extends AbstractController
 
         //recuperation du panier
         $panier = $session->get('panier', []);
-
 
         //pour qu'on puisse pas ajouter un produit avec un id qui n'existe pas
         $id = $produit->getId();
@@ -57,6 +57,5 @@ class CartController extends AbstractController
 
 
         return $this->redirectToRoute('cart_index');
-     
     }
 }
