@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Utilisateurs;
+use App\Entity\Users;
 use App\Form\RegistrationType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityNotFoundException;
@@ -21,7 +21,7 @@ class UserController extends AbstractController
      */
     public function index(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder, ValidatorInterface $validator): response
     {
-        $user = new Utilisateurs();
+        $user = new Users();
         $body = json_decode($request->getContent(), true);
         $user->setNom($body["firstname"]);
         $user->setEmail($body["email"]);
