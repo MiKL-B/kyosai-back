@@ -19,10 +19,7 @@ class Commande
      */
     private $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Utilisateurs::class, inversedBy="commandes")
-     */
-    private $utilisateurs;
+
 
     /**
      * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="commandes")
@@ -32,18 +29,6 @@ class Commande
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getUtilisateurs(): ?Utilisateurs
-    {
-        return $this->utilisateurs;
-    }
-
-    public function setUtilisateurs(?Utilisateurs $utilisateurs): self
-    {
-        $this->utilisateurs = $utilisateurs;
-
-        return $this;
     }
 
     public function getUsers(): ?Users

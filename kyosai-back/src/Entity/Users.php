@@ -37,7 +37,6 @@ class Users implements UserInterface
 
     /**
      * @ORM\ManyToMany(targetEntity=Role::class, inversedBy="users")
-     * @ORM\Column(type="json")
      */
     private $roles = [];
 
@@ -59,6 +58,7 @@ class Users implements UserInterface
     public function __construct()
     {
         $this->commandes = new ArrayCollection();
+        $this->roles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -88,25 +88,27 @@ class Users implements UserInterface
         return (string) $this->email;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function getRoles(): array
+    public function addRole(Role $role): self
     {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-       // $roles[] = 'ROLE_USER';
-
-        return array();
-    }
-
-    public function setRoles(array $roles): self
-    {
-        $this->roles = $roles;
+        if (!$this->roles->contains($role)) {
+            $this->roles[] = $role;
+        }
 
         return $this;
     }
 
+    public function removeRole(Role $role): self
+    {
+        $this->roles->removeElement($role);
+
+        return $this;
+    }
+    public function getRoles()
+    {
+        return array_map(function ($role) {
+            return strval($role->getName());
+        }, $this->roles->toArray());
+    }
     /**
      * This method is not needed for apps that do not check user passwords.
      *

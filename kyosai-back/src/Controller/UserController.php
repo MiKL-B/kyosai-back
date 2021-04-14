@@ -25,10 +25,11 @@ class UserController extends AbstractController
         $body = json_decode($request->getContent(), true);
         $user->setNom($body["firstname"]);
         $user->setEmail($body["email"]);
-        $user->setMotDePasse($body["mdp"]);
-        $hash = $encoder->encodePassword($user, $user->getMotdePasse());
-        $user->setMotDePasse($hash);
+        $user->setPassword($body["mdp"]);
+        $hash = $encoder->encodePassword($user, $user->getPassword());
+        $user->setPassword($hash);
         $errors = $validator->validate($user);
+        // + ajouter role
         if (count($errors) > 0) {
             /*
          * Uses a __toString method on the $errors variable which is a

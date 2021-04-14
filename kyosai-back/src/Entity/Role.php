@@ -22,13 +22,18 @@ class Role
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Utilisateurs::class, mappedBy="roles")
+     * @ORM\ManyToMany(targetEntity=Users::class, mappedBy="roles")
      */
-    private $utilisateurs;
+    private $users;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
 
     public function __construct()
     {
-        $this->utilisateurs = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -37,28 +42,40 @@ class Role
     }
 
     /**
-     * @return Collection|Utilisateurs[]
+     * @return Collection|Users[]
      */
-    public function getUtilisateurs(): Collection
+    public function getUsers(): Collection
     {
-        return $this->utilisateurs;
+        return $this->users;
     }
 
-    public function addUtilisateur(Utilisateurs $utilisateur): self
+    public function addUsers(Users $user): self
     {
-        if (!$this->utilisateurs->contains($utilisateur)) {
-            $this->utilisateurs[] = $utilisateur;
-            $utilisateur->addRole($this);
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addRole($this);
         }
 
         return $this;
     }
 
-    public function removeUtilisateur(Utilisateurs $utilisateur): self
+    public function removeUsers(Users $user): self
     {
-        if ($this->utilisateurs->removeElement($utilisateur)) {
-            $utilisateur->removeRole($this);
+        if ($this->users->removeElement($user)) {
+            $user->removeRole($this);
         }
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }
