@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 /**
  * @ApiResource()
  * @ORM\Entity(repositoryClass=UsersRepository::class)
@@ -53,7 +54,7 @@ class Users implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $mot_de_passe;
+    private $password;
 
     public function __construct()
     {
@@ -94,9 +95,9 @@ class Users implements UserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+       // $roles[] = 'ROLE_USER';
 
-        return array_unique($roles);
+        return array();
     }
 
     public function setRoles(array $roles): self
@@ -113,7 +114,7 @@ class Users implements UserInterface
      */
     public function getPassword(): ?string
     {
-        return null;
+        return $this->password;
     }
 
     /**
@@ -177,14 +178,11 @@ class Users implements UserInterface
         return $this;
     }
 
-    public function getMotDePasse(): ?string
-    {
-        return $this->mot_de_passe;
-    }
 
-    public function setMotDePasse(string $mot_de_passe): self
+
+    public function setPassword(string $password): self
     {
-        $this->mot_de_passe = $mot_de_passe;
+        $this->password = $password;
 
         return $this;
     }
