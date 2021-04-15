@@ -3,3 +3,8 @@
 #    controller: App\Controller\DefaultController::index
 api_login_check:
   path: /api/login_check
+  controller: App\Controller\SecurityController::index
+
+api_shop_index:
+  path: /api/shop
+  controller: App\Controller\ApiShopController::index

@@ -13,12 +13,12 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/api/login_check", name="api_login_check")
+     * @Route("/api/login_check", name="api_login_check", methods={"POST","GET"})
      * @return JsonResponse
      */
     public function index(): JsonResponse
     {
-        // $user = new Users();
+
         $user = $this->getUser();
         return new JsonResponse($user);
     }
@@ -34,5 +34,14 @@ class SecurityController extends AbstractController
         $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->json($authenticationUtils->getLastUsername());
+    }
+
+    /**
+     * @Route("/logout", name="app_logout", methods={"GET"})
+     */
+    public function logout()
+    {
+        // controller can be blank: it will never be executed!
+        throw new \Exception('Don\'t forget to activate logout in security.yaml');
     }
 }
