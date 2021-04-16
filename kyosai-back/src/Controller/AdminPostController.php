@@ -28,8 +28,10 @@ class AdminPostController extends AbstractController
         $produit->setPrix($body["prix_produit"]);
         $produit->setImage($body["image_produit"]);
         $produit->setCreatedAt(new DateTime());
+
         $persistedCategory = $categoryRepository->findOneBy(['label' => $body["category_produit"]]);
         $produit->addCategory($persistedCategory);
+        
         $manager->persist($produit);
         $manager->flush();
 
