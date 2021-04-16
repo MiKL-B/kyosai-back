@@ -23,15 +23,17 @@ class UserController extends AbstractController
     /**
      * @Route("/register", name="register", methods={"POST","GET"})
      */
-    public function index(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder, ValidatorInterface $validator, Role $role): response
+    public function index(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder, ValidatorInterface $validator, RoleRepository $roleRepository): response
     {
 
-
+       
         $user = new Users();
         $body = json_decode($request->getContent(), true);
         $user->setNom($body["firstname"]);
         $user->setEmail($body["email"]);
         $user->setPassword($body["mdp"]);
+        $monRole = $roleRepository->findOneBy(['name' => 'ROLE_USER']);
+        $user->addRole($monRole);
         $hash = $encoder->encodePassword($user, $user->getPassword());
         $user->setPassword($hash);
         $errors = $validator->validate($user);
