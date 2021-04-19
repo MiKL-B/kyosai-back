@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\CartRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CartRepository;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 /**
  * @ORM\Entity(repositoryClass=CartRepository::class)
@@ -23,15 +24,17 @@ class Cart
     private $quantity;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="carts")
+     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="produits")
+     * @JoinColumn(name="user_id", referencedColumnName="id")
      */
-    private $user;
+    private $user_id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Produits::class, inversedBy="carts")
+     * @ORM\ManyToOne(targetEntity=Produits::class, inversedBy="users")
+     * @JoinColumn(name="produit_id", referencedColumnName="id")
      */
-    private $produit;
- 
+    private $produit_id;
+
 
     public function getId(): ?int
     {
@@ -50,29 +53,43 @@ class Cart
         return $this;
     }
 
-    public function getUser(): ?Users
+    /**
+     * Get the value of user_id
+     */ 
+    public function getUser_id()
     {
-        return $this->user;
+        return $this->user_id;
     }
 
-    public function setUser(?Users $user): self
+    /**
+     * Set the value of user_id
+     *
+     * @return  self
+     */ 
+    public function setUser_id($user_id)
     {
-        $this->user = $user;
+        $this->user_id = $user_id;
 
         return $this;
     }
 
-    public function getProduit(): ?Produits
+    /**
+     * Get the value of produit_id
+     */ 
+    public function getProduit_id()
     {
-        return $this->produit;
+        return $this->produit_id;
     }
 
-    public function setProduit(?Produits $produit): self
+    /**
+     * Set the value of produit_id
+     *
+     * @return  self
+     */ 
+    public function setProduit_id($produit_id)
     {
-        $this->produit = $produit;
+        $this->produit_id = $produit_id;
 
         return $this;
     }
-
- 
 }

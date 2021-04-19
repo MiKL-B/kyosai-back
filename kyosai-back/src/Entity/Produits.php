@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\ProduitsRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ProduitsRepository;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ApiResource()
@@ -47,15 +47,15 @@ class Produits
      */
     private $createdAt;
 
+
     /**
-     * @ORM\OneToMany(targetEntity=Cart::class, mappedBy="produit")
-     */
-    private $carts;
+     * @ORM\OneToMany(targetEntity=Cart::class, mappedBy="user_id")
+     **/
+    private $users;
 
     public function __construct()
     {
         $this->categories = new ArrayCollection();
-        $this->carts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -136,34 +136,33 @@ class Produits
     }
 
     /**
-     * @return Collection|Cart[]
+     * Get the value of users
      */
-    public function getCarts(): Collection
+    public function getUsers()
     {
-        return $this->carts;
+        return $this->users;
     }
 
-    public function addCart(Cart $cart): self
+    public function addUser(Users $user): self
     {
-        if (!$this->carts->contains($cart)) {
-            $this->carts[] = $cart;
-            $cart->setProduit($this);
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addProduit($this);
         }
 
         return $this;
     }
 
-    public function removeCart(Cart $cart): self
+    public function removeUser(Users $user): self
     {
-        if ($this->carts->removeElement($cart)) {
+        if ($this->users->removeElement($user)) {
             // set the owning side to null (unless already changed)
-            if ($cart->getProduit() === $this) {
-                $cart->setProduit(null);
-            }
+            //if ($user->getProduits() === $this) {
+            $user->removeProduit($this);
+            // }
+
         }
 
         return $this;
     }
-
- 
 }

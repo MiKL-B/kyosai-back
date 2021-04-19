@@ -46,7 +46,7 @@ class Users implements UserInterface
     private $nom;
 
     /**
-     * @ORM\OneToMany(targetEntity=Commande::class, mappedBy="users")
+     * @ORM\OneToMany(targetEntity=Commande::class, mappedBy="user")
      */
     private $commandes;
 
@@ -56,15 +56,15 @@ class Users implements UserInterface
     private $password;
 
     /**
-     * @ORM\OneToMany(targetEntity=Cart::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Cart::class, mappedBy="produit_id")
      */
-    private $carts;
+    private $produits;
 
     public function __construct()
     {
         $this->commandes = new ArrayCollection();
         $this->roles = new ArrayCollection();
-        $this->carts = new ArrayCollection();
+        $this->produits = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -196,30 +196,30 @@ class Users implements UserInterface
     }
 
     /**
-     * @return Collection|Cart[]
+     * @return Collection|Produit[]
      */
-    public function getCarts(): Collection
+    public function getProduits(): Collection
     {
-        return $this->carts;
+        return $this->produits;
     }
 
-    public function addCart(Cart $cart): self
+    public function addProduit(Produits $produit): self
     {
-        if (!$this->carts->contains($cart)) {
-            $this->carts[] = $cart;
-            $cart->setUser($this);
+        if (!$this->produits->contains($produit)) {
+            $this->produits[] = $produit;
+            //$produit->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeCart(Cart $cart): self
+    public function removeProduit(Produits $produit): self
     {
-        if ($this->carts->removeElement($cart)) {
+        if ($this->produits->removeElement($produit)) {
             // set the owning side to null (unless already changed)
-            if ($cart->getUser() === $this) {
-                $cart->setUser(null);
-            }
+            // if ($produit->getUser() === $this) {
+            $produit->removeUser($this);
+            //}
         }
 
         return $this;
