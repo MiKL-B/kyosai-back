@@ -47,9 +47,15 @@ class Produits
      */
     private $createdAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Cart::class, mappedBy="produit")
+     */
+    private $carts;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->carts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -125,6 +131,36 @@ class Produits
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Cart[]
+     */
+    public function getCarts(): Collection
+    {
+        return $this->carts;
+    }
+
+    public function addCart(Cart $cart): self
+    {
+        if (!$this->carts->contains($cart)) {
+            $this->carts[] = $cart;
+            $cart->setProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCart(Cart $cart): self
+    {
+        if ($this->carts->removeElement($cart)) {
+            // set the owning side to null (unless already changed)
+            if ($cart->getProduit() === $this) {
+                $cart->setProduit(null);
+            }
+        }
 
         return $this;
     }
