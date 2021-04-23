@@ -63,6 +63,7 @@ class UserController extends AbstractController
     public function test(Request $request, UsersRepository $userRepository, ProduitsRepository $produitsRepository, EntityManagerInterface $manager)
     {
         //decode token
+        //remettre dans cart controller et faire en plusieurs méthode
         $tokenParts = explode(".", substr($request->headers->get('Authorization'), 7));
         $tokenHeader = base64_decode($tokenParts[0]);
         $tokenPayload = base64_decode($tokenParts[1]);
