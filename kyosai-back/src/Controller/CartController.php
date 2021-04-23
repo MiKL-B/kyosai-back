@@ -5,12 +5,14 @@ namespace App\Controller;
 use App\Entity\Produits;
 use App\Repository\CartRepository;
 use App\Repository\ProduitsRepository;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Security;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Symfony\Component\Security\Core\Security;
 
 class CartController extends AbstractController
 {
@@ -67,13 +69,13 @@ class CartController extends AbstractController
      * Undocumented function
      * @Route("/test/panier", name="test", methods={"POST","GET"})
      */
-    public function test(AuthenticationUtils $authenticationUtils, Security $security)
+    public function test(Request $request)
     {
 
 
-        $user =  $this->get('security.token_storage')->getToken()->getUser();
+        $autorizationHeader = $request->headers->get('Autorization');
 
 
-        return new JsonResponse($user);
+        return substr($autorizationHeader, 7);
     }
 }
