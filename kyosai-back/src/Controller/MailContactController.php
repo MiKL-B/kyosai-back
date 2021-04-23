@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Component\Mime\Email;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,7 +32,7 @@ class MailContactController extends AbstractController
             ->html($body['message']);
 
         $mailer->send($email);
-        dd($email);
+
         return $this->json($mailer);
     }
 }

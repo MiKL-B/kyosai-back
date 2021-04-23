@@ -48,7 +48,7 @@ class CartController extends AbstractController
      */
     public function add(Produits $produit, SessionInterface $session, CartRepository $cart)
     {
-
+      
         //recuperation du panier
         $panier = $session->get('panier', []);
 
@@ -73,9 +73,15 @@ class CartController extends AbstractController
     {
 
 
-        $autorizationHeader = $request->headers->get('Autorization');
+        $authorizationHeader = $request->headers->get('Autorization');
 
+        // return new Response(substr($request->headers->get('Authorization'), 7));
+        $tokenParts = explode(".", substr($request->headers->get('Authorization'), 7));
+        $tokenHeader = base64_decode($tokenParts[0]);
+        $tokenPayload = base64_decode($tokenParts[1]);
+        $jwtHeader = json_decode($tokenHeader);
+        $jwtPayload = json_decode($tokenPayload);
 
-        return substr($autorizationHeader, 7);
+        return new  JsonResponse($jwtPayload);
     }
 }
