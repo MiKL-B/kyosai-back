@@ -26,7 +26,7 @@ class UserController extends AbstractController
     public function index(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder, ValidatorInterface $validator, RoleRepository $roleRepository): response
     {
 
-       
+
         $user = new Users();
         $body = json_decode($request->getContent(), true);
         $user->setNom($body["firstname"]);
@@ -51,5 +51,21 @@ class UserController extends AbstractController
         $manager->persist($user);
         $manager->flush();
         return $this->json($body['firstname']);
+    }
+    /**
+     * Undocumented function
+     *@Route("/test/user",name="test_user", methods={"GET"})
+     */
+    public function test(Request $request, UsersRepository $userRepository)
+    {
+        $tokenParts = explode(".", substr($request->headers->get('Authorization'), 7));
+        $tokenHeader = base64_decode($tokenParts[0]);
+        $tokenPayload = base64_decode($tokenParts[1]);
+        $jwtHeader = json_decode($tokenHeader);
+        $jwtPayload = json_decode($tokenPayload);
+
+        $user = $userRepository->findOneBy(['email' => $jwtPayload->username]);
+
+        return $this->json($user);
     }
 }

@@ -49,7 +49,7 @@ class Produits
 
 
     /**
-     * @ORM\OneToMany(targetEntity=Cart::class, mappedBy="user_id")
+     * @ORM\OneToMany(targetEntity="Cart", mappedBy="produit")
      **/
     private $users;
 

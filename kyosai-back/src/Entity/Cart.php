@@ -24,16 +24,16 @@ class Cart
     private $quantity;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="produits")
-     * @JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Users")
+     * @ORM\JoinColumn()
      */
-    private $user_id;
+    private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Produits::class, inversedBy="users")
-     * @JoinColumn(name="produit_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Produits")
+     * @ORM\JoinColumn()
      */
-    private $produit_id;
+    private $produit;
 
 
     public function getId(): ?int
@@ -53,42 +53,44 @@ class Cart
         return $this;
     }
 
+
+
     /**
-     * Get the value of user_id
-     */ 
-    public function getUser_id()
+     * Get the value of user
+     */
+    public function getUser()
     {
-        return $this->user_id;
+        return $this->user;
     }
 
     /**
-     * Set the value of user_id
+     * Set the value of user
      *
      * @return  self
-     */ 
-    public function setUser_id($user_id)
+     */
+    public function setUser($user)
     {
-        $this->user_id = $user_id;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * Get the value of produit_id
-     */ 
-    public function getProduit_id()
+     * Get the value of produit
+     */
+    public function getProduit()
     {
-        return $this->produit_id;
+        return $this->produit;
     }
 
     /**
-     * Set the value of produit_id
+     * Set the value of produit
      *
      * @return  self
-     */ 
-    public function setProduit_id($produit_id)
+     */
+    public function setProduit($produit)
     {
-        $this->produit_id = $produit_id;
+        $this->produit = $produit;
 
         return $this;
     }

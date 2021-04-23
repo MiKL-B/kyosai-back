@@ -56,7 +56,7 @@ class Users implements UserInterface
     private $password;
 
     /**
-     * @ORM\OneToMany(targetEntity=Cart::class, mappedBy="produit_id")
+     * @ORM\OneToMany(targetEntity="Cart", mappedBy="user")
      */
     private $produits;
 
@@ -207,7 +207,9 @@ class Users implements UserInterface
     {
         if (!$this->produits->contains($produit)) {
             $this->produits[] = $produit;
-            //$produit->setUser($this);
+            var_dump($produit->getId());
+            var_dump($this->email);
+           // $produit->addUser($this);
         }
 
         return $this;
