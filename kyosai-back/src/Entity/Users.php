@@ -60,11 +60,13 @@ class Users implements UserInterface
      */
     private $carts;
 
+
     public function __construct()
     {
         $this->commandes = new ArrayCollection();
         $this->roles = new ArrayCollection();
         $this->carts = new ArrayCollection();
+    
     }
 
     public function getId(): ?int
@@ -226,4 +228,6 @@ class Users implements UserInterface
 
         return $this;
     }
+
+  
 }

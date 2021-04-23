@@ -47,17 +47,18 @@ class Produits
      */
     private $createdAt;
 
-
-
     /**
      * @ORM\OneToMany(targetEntity=Cart::class, mappedBy="produit")
      */
     private $carts;
 
+
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
         $this->carts = new ArrayCollection();
+  
     }
 
     public function getId(): ?int
@@ -169,4 +170,6 @@ class Produits
 
         return $this;
     }
+
+   
 }
