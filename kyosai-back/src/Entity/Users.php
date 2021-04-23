@@ -56,15 +56,15 @@ class Users implements UserInterface
     private $password;
 
     /**
-     * @ORM\OneToMany(targetEntity=Cart::class, mappedBy="produit_id")
+     * @ORM\OneToMany(targetEntity=Cart::class, mappedBy="user")
      */
-    private $produits;
+    private $carts;
 
     public function __construct()
     {
         $this->commandes = new ArrayCollection();
         $this->roles = new ArrayCollection();
-        $this->produits = new ArrayCollection();
+        $this->carts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -195,31 +195,33 @@ class Users implements UserInterface
         return $this;
     }
 
+
     /**
-     * @return Collection|Produit[]
+     * @return Collection|Cart[]
      */
-    public function getProduits(): Collection
+    public function getCarts(): Collection
     {
-        return $this->produits;
+       
+        return $this->carts;
     }
 
-    public function addProduit(Produits $produit): self
+    public function addCart(Cart $cart): self
     {
-        if (!$this->produits->contains($produit)) {
-            $this->produits[] = $produit;
-            //$produit->setUser($this);
+        if (!$this->carts->contains($cart)) {
+            $this->carts[] = $cart;
+            $cart->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeProduit(Produits $produit): self
+    public function removeCart(Cart $cart): self
     {
-        if ($this->produits->removeElement($produit)) {
+        if ($this->carts->removeElement($cart)) {
             // set the owning side to null (unless already changed)
-            // if ($produit->getUser() === $this) {
-            $produit->removeUser($this);
-            //}
+            if ($cart->getUser() === $this) {
+                $cart->setUser(null);
+            }
         }
 
         return $this;

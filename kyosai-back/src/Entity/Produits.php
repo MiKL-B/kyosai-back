@@ -48,14 +48,16 @@ class Produits
     private $createdAt;
 
 
+
     /**
-     * @ORM\OneToMany(targetEntity=Cart::class, mappedBy="user_id")
-     **/
-    private $users;
+     * @ORM\OneToMany(targetEntity=Cart::class, mappedBy="produit")
+     */
+    private $carts;
 
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->carts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -135,32 +137,34 @@ class Produits
         return $this;
     }
 
+    
+
+
     /**
-     * Get the value of users
+     * @return Collection|Cart[]
      */
-    public function getUsers()
+    public function getCarts(): Collection
     {
-        return $this->users;
+        return $this->carts;
     }
 
-    public function addUser(Users $user): self
+    public function addCart(Cart $cart): self
     {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-            $user->addProduit($this);
+        if (!$this->carts->contains($cart)) {
+            $this->carts[] = $cart;
+            $cart->setProduit($this);
         }
 
         return $this;
     }
 
-    public function removeUser(Users $user): self
+    public function removeCart(Cart $cart): self
     {
-        if ($this->users->removeElement($user)) {
+        if ($this->carts->removeElement($cart)) {
             // set the owning side to null (unless already changed)
-            //if ($user->getProduits() === $this) {
-            $user->removeProduit($this);
-            // }
-
+            if ($cart->getProduit() === $this) {
+                $cart->setProduit(null);
+            }
         }
 
         return $this;
