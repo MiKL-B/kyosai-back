@@ -2,20 +2,12 @@
 
 namespace App\Controller;
 
-use App\Entity\Cart;
-use App\Entity\Role;
 use App\Entity\Users;
-use App\Entity\Panier;
-use App\Form\RegistrationType;
 use App\Repository\RoleRepository;
-use App\Repository\UsersRepository;
-use App\Repository\ProduitsRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityNotFoundException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -56,31 +48,5 @@ class UserController extends AbstractController
         return $this->json($body['firstname']);
     }
 
-    /**
-     * Undocumented function
-     *@Route("/test/user", name="test_user", methods={"GET"})
-     */
-    public function test(Request $request, UsersRepository $userRepository, ProduitsRepository $produitsRepository, EntityManagerInterface $manager)
-    {
-        //decode token
-        //remettre dans cart controller et faire en plusieurs méthode
-        $tokenParts = explode(".", substr($request->headers->get('Authorization'), 7));
-        $tokenHeader = base64_decode($tokenParts[0]);
-        $tokenPayload = base64_decode($tokenParts[1]);
-        $jwtHeader = json_decode($tokenHeader);
-        $jwtPayload = json_decode($tokenPayload);
-
-        $user = $userRepository->findOneBy(['email' => $jwtPayload->username]);
-        $newObj = new Cart();
-        $newObj->setUser($user);
-        $produit = $produitsRepository->findOneBy(['nom' => 'shenron']);
-        $newObj->setProduit($produit);
-        $newObj->setQuantity(1);
-        $user->addCart($newObj);
-        $manager->persist($user);
-        $manager->persist($newObj);
-        $manager->flush();
-
-        return $this->json($user->getCarts());
-    }
+   
 }
