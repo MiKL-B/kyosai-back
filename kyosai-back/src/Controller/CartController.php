@@ -9,6 +9,7 @@ use App\Repository\ProduitsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -18,60 +19,49 @@ class CartController extends AbstractController
     /**
      * @Route("/panier", name="cart_index", methods={"POST","GET"})
      */
-    public function index(SessionInterface $session, ProduitsRepository $produitRepository)
+    public function index(SessionInterface $session, ProduitsRepository $produitRepository, UsersRepository $userRepository, Request $request)
     {
 
-        $panier = $session->get('panier', []);
+        // $panier = $session->get('panier', []);
 
-        $panierWithData = [];
-        $total = 0;
+        // $panierWithData = [];
+        // $total = 0;
 
-        foreach ($panier as $id => $quantity) {
+        // foreach ($panier as $id => $quantity) {
 
-            $produit = $produitRepository->find($id);
-            $panierWithData[] = [
-                "produit" => $produit,
-                'quantity' => $quantity
-            ];
-            $total += $produit->getPrix() * $quantity;
-        };
+        //     $produit = $produitRepository->find($id);
+        //     $panierWithData[] = [
+        //         "produit" => $produit,
+        //         'quantity' => $quantity
+        //     ];
+        //     $total += $produit->getPrix() * $quantity;
+        // };
 
-        return $this->json([
-            'panierWithData' => $panierWithData,
-            'total' => $total,
+        // return $this->json([
+        //     'panierWithData' => $panierWithData,
+        //     'total' => $total,
 
-        ]);
-    }
-    /**
-     * @Route("/panier/add/{id}", name="cart_add", methods={"POST","GET"})
-     */
-    public function add(Produits $produit, SessionInterface $session)
-    {
+        // ]);
 
-        //recuperation du panier
-        $panier = $session->get('panier', []);
+        $tokenParts = explode(".", substr($request->headers->get('Authorization'), 7));
+        $tokenHeader = base64_decode($tokenParts[0]);
+        $tokenPayload = base64_decode($tokenParts[1]);
+        $jwtHeader = json_decode($tokenHeader);
+        $jwtPayload = json_decode($tokenPayload);
+        //ajouter produit au panier a l'utilisateur
+        $user = $userRepository->findOneBy(['email' => $jwtPayload->username]);
 
-        //pour qu'on puisse pas ajouter un produit avec un id qui n'existe pas
-        $id = $produit->getId();
-        if (!empty($panier[$id])) {
-            $panier[$id]++;
-        } else {
-            $panier[$id] = 1;
-        }
-        $session->set('panier', $panier);
-
-
-        return $this->redirectToRoute('cart_index');
+        return $this->json($user->getCarts());
     }
 
     /**
      * Undocumented function
      *@Route("/test/user/{id}", name="test_user", methods={"GET"})
      */
-    public function test(Request $request, UsersRepository $userRepository, ProduitsRepository $produitsRepository, EntityManagerInterface $manager, Produits $produits)
+    public function test(Request $request, UsersRepository $userRepository, ProduitsRepository $produitsRepository, EntityManagerInterface $manager, Produits $produitEntity)
     {
         //decode token
-        //remettre dans cart controller et faire en plusieurs méthode
+
         $tokenParts = explode(".", substr($request->headers->get('Authorization'), 7));
         $tokenHeader = base64_decode($tokenParts[0]);
         $tokenPayload = base64_decode($tokenParts[1]);
@@ -84,11 +74,17 @@ class CartController extends AbstractController
         // différencier produits qui vient de entity  produit(s)
         // et produit qui vient de repository         produit
         //obtenir l'id du produits l'entité
-        $id = $produits->getId();
+        $id = $produitEntity->getId();
         //allez le chercher dans le dépot
         $produit = $produitsRepository->findOneBy(['id' => $id]);
         $newObj->setProduit($produit);
-        $newObj->setQuantity(1);
+        $newQuantity = 0;
+        if ($newObj->getQuantity() == 1) {
+            $newObj->setQuantity($newQuantity++);
+        } else {
+            $newObj->setQuantity(1);
+        }
+
         $user->addCart($newObj);
         $manager->persist($user);
         $manager->persist($newObj);

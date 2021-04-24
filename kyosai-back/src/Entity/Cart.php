@@ -7,6 +7,7 @@ use App\Repository\CartRepository;
 use Doctrine\ORM\Mapping\JoinColumn;
 use ApiPlatform\Core\Annotation\ApiResource;
 
+
 /**
  * @ApiResource()
  * @ORM\Entity(repositoryClass=CartRepository::class)
@@ -22,6 +23,7 @@ class Cart
 
     /**
      * @ORM\Column(type="integer")
+     * 
      */
     private $quantity;
 
