@@ -22,8 +22,9 @@ class MailContactController extends AbstractController
             // from = user
             ->from($body['email'])
             // to = asso
-            ->to('michaelbecquer7@gmail.com')
+
             ->replyTo($body['email'])
+            ->to('YourAdress@mail.fr')
             //     //->cc('cc@example.com')
             //     //->bcc('bcc@example.com')
             //     //->replyTo('fabien@example.com')

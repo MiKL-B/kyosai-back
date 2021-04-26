@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Cart;
+use App\Entity\Users;
 use App\Entity\Produits;
+use App\Repository\CartRepository;
 use App\Repository\UsersRepository;
 use App\Repository\ProduitsRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -12,7 +14,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
 
 class CartController extends AbstractController
 {
@@ -55,10 +56,9 @@ class CartController extends AbstractController
     }
 
     /**
-     * Undocumented function
      *@Route("/test/user/{id}", name="test_user", methods={"GET"})
      */
-    public function test(Request $request, UsersRepository $userRepository, ProduitsRepository $produitsRepository, EntityManagerInterface $manager, Produits $produitEntity)
+    public function test(Request $request, UsersRepository $userRepository, ProduitsRepository $produitsRepository, EntityManagerInterface $manager, Produits $produitEntity, CartRepository $cartRepository)
     {
         //decode token
 
@@ -71,24 +71,42 @@ class CartController extends AbstractController
         $user = $userRepository->findOneBy(['email' => $jwtPayload->username]);
         $newObj = new Cart();
         $newObj->setUser($user);
-        // différencier produits qui vient de entity  produit(s)
-        // et produit qui vient de repository         produit
         //obtenir l'id du produits l'entité
         $id = $produitEntity->getId();
         //allez le chercher dans le dépot
         $produit = $produitsRepository->findOneBy(['id' => $id]);
-        $newObj->setProduit($produit);
-        $newQuantity = 0;
-        if ($newObj->getQuantity() == 1) {
-            $newObj->setQuantity($newQuantity++);
-        } else {
+
+        $result =  $cartRepository->count(['produit' => $produitEntity, 'user' => $user]);
+
+
+        $currentCart = $cartRepository->findOneBy(['produit' => $produitEntity, 'user' => $user]);
+        if ($result == 0) {
             $newObj->setQuantity(1);
+            $newObj->setProduit($produit);
+            $user->addCart($newObj);
+            $manager->persist($user);
+            $manager->persist($newObj);
+            $manager->flush();
+        } else {
+            $currentCart->setQuantity($currentCart->getQuantity() + 1);
+            $currentCart->setProduit($produit);
+            $user->addCart($currentCart);
+            $manager->persist($user);
+            $manager->persist($currentCart);
+            $manager->flush();
         }
 
-        $user->addCart($newObj);
-        $manager->persist($user);
-        $manager->persist($newObj);
-        $manager->flush();
+
+
+
+
+
+
+        // $newObj->setProduit($produit);
+        // $user->addCart($newObj);
+        // $manager->persist($user);
+        // $manager->persist($newObj);
+        // $manager->flush();
 
         return $this->json($user->getCarts());
     }
