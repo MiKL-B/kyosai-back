@@ -96,18 +96,6 @@ class CartController extends AbstractController
             $manager->flush();
         }
 
-
-
-
-
-
-
-        // $newObj->setProduit($produit);
-        // $user->addCart($newObj);
-        // $manager->persist($user);
-        // $manager->persist($newObj);
-        // $manager->flush();
-
         return $this->json($user->getCarts());
     }
 }
