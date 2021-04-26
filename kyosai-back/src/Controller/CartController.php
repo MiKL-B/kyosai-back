@@ -10,6 +10,7 @@ use App\Repository\UsersRepository;
 use App\Repository\ProduitsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -97,5 +98,15 @@ class CartController extends AbstractController
         }
 
         return $this->json($user->getCarts());
+    }
+    /**
+     *@Route("/delete/cart/{id}", name="delete_cart", methods={"DELETE"})
+     */
+    public function delete(int $id, EntityManagerInterface $manager, CartRepository $cartRepository)
+    {
+        $cart = $cartRepository->findOneBy(['id' => $id]);
+        $manager->remove($cart);
+        $manager->flush();
+        return new Response('Le produit a bien été supprimé');
     }
 }
