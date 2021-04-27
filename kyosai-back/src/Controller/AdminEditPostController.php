@@ -46,7 +46,7 @@ class AdminEditPostController extends AbstractController
     /**
      * @Route("/api/admin/edit/{id}", name="api_admin_edit", methods={"POST","GET"})
      */
-    public function edit(int $id,  ProduitsRepository $produitRepository, Request $request, EntityManagerInterface $manager, CategoryRepository $categoryRepository)
+    public function edit(int $id, ProduitsRepository $produitRepository, Request $request, EntityManagerInterface $manager, CategoryRepository $categoryRepository)
     {
 
         $body = json_decode($request->getContent(), true);

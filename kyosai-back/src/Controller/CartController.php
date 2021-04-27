@@ -21,7 +21,7 @@ class CartController extends AbstractController
     /**
      * @Route("/panier", name="cart_index", methods={"POST","GET"})
      */
-    public function index(SessionInterface $session, ProduitsRepository $produitRepository, UsersRepository $userRepository, Request $request)
+    public function index(UsersRepository $userRepository, Request $request)
     {
         $tokenParts = explode(".", substr($request->headers->get('Authorization'), 7));
         $tokenHeader = base64_decode($tokenParts[0]);

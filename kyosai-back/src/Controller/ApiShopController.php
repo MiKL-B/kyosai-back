@@ -14,7 +14,7 @@ class ApiShopController extends AbstractController
     /**
      * @Route("/shop", name="shop_index", methods={"GET"})
      */
-    public function index(ProduitsRepository $produitsRepository, CategoryRepository $categoryRepository): response
+    public function index(ProduitsRepository $produitsRepository): response
     {
         return $this->json($produitsRepository->findAll(), 200, []);
     }
