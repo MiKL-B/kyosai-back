@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use DateTime;
+use App\Entity\Produits;
 use App\Repository\CategoryRepository;
 use App\Repository\ProduitsRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -13,7 +14,27 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminEditPostController extends AbstractController
 {
+    /**
+     * @Route("/api/admin", name="api_admin_index", methods={"POST","GET"})
+     */
+    public function index(Request $request, EntityManagerInterface $manager, CategoryRepository $categoryRepository): Response
+    {
+        $produit = new Produits();
+        $body = json_decode($request->getContent(), true);
+        $produit->setNom($body["name_produit"]);
+        $produit->setPrix($body["prix_produit"]);
+        $produit->setImage($body["image_produit"]);
+        $produit->setCreatedAt(new DateTime());
+        foreach ($body['category_produit'] as $categoryLabel) {
+            $persistedCategory = $categoryRepository->findOneBy(['label' => $categoryLabel]);
+            $produit->addCategory($persistedCategory);
+        }
 
+        $manager->persist($produit);
+        $manager->flush();
+
+        return $this->json($produit);
+    }
     /**
      * @Route("/api/admin/edit/view/{id}", name="api_admin_edit_view", methods={"POST","GET"})
      */

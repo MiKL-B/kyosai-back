@@ -18,4 +18,11 @@ class ApiShopController extends AbstractController
     {
         return $this->json($produitsRepository->findAll(), 200, []);
     }
+    /**
+     * @Route("/category/list", name="category_list", methods={"GET"})
+     */
+    public function categoryList(CategoryRepository $categoryRepository): response
+    {
+        return $this->json($categoryRepository->findAll(), 200, []);
+    }
 }

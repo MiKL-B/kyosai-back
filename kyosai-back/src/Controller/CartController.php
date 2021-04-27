@@ -23,28 +23,6 @@ class CartController extends AbstractController
      */
     public function index(SessionInterface $session, ProduitsRepository $produitRepository, UsersRepository $userRepository, Request $request)
     {
-
-        // $panier = $session->get('panier', []);
-
-        // $panierWithData = [];
-        // $total = 0;
-
-        // foreach ($panier as $id => $quantity) {
-
-        //     $produit = $produitRepository->find($id);
-        //     $panierWithData[] = [
-        //         "produit" => $produit,
-        //         'quantity' => $quantity
-        //     ];
-        //     $total += $produit->getPrix() * $quantity;
-        // };
-
-        // return $this->json([
-        //     'panierWithData' => $panierWithData,
-        //     'total' => $total,
-
-        // ]);
-
         $tokenParts = explode(".", substr($request->headers->get('Authorization'), 7));
         $tokenHeader = base64_decode($tokenParts[0]);
         $tokenPayload = base64_decode($tokenParts[1]);
@@ -57,9 +35,9 @@ class CartController extends AbstractController
     }
 
     /**
-     *@Route("/test/user/{id}", name="test_user", methods={"GET"})
+     *@Route("/add/cart/{id}", name="add_cart", methods={"GET"})
      */
-    public function test(Request $request, UsersRepository $userRepository, ProduitsRepository $produitsRepository, EntityManagerInterface $manager, Produits $produitEntity, CartRepository $cartRepository)
+    public function add(Request $request, UsersRepository $userRepository, ProduitsRepository $produitsRepository, EntityManagerInterface $manager, Produits $produitEntity, CartRepository $cartRepository)
     {
         //decode token
 
