@@ -22,8 +22,6 @@ class UserController extends AbstractController
      */
     public function index(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder, ValidatorInterface $validator, RoleRepository $roleRepository): response
     {
-
-
         $user = new Users();
         $body = json_decode($request->getContent(), true);
         $user->setNom($body["firstname"]);
@@ -42,7 +40,6 @@ class UserController extends AbstractController
          * for debugging.
          */
             $errorsString = (string) $errors;
-
             return $this->json(['errors' => $errors], 409);
         }
         $manager->persist($user);
