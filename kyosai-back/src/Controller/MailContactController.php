@@ -25,10 +25,6 @@ class MailContactController extends AbstractController
 
             ->replyTo($body['email'])
             ->to('YourAdress@mail.fr')
-            //     //->cc('cc@example.com')
-            //     //->bcc('bcc@example.com')
-            //     //->replyTo('fabien@example.com')
-            //     //->priority(Email::PRIORITY_HIGH)
             ->subject($body['name'])
 
             ->html($body['message']);

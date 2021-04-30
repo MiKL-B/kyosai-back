@@ -15,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AdminEditPostController extends AbstractController
 {
     /**
-     * @Route("/api/admin", name="api_admin_index", methods={"POST","GET"})
+     * @Route("/api/admin", name="api_admin_index", methods={"POST"})
      */
     public function index(Request $request, EntityManagerInterface $manager, CategoryRepository $categoryRepository): Response
     {
@@ -36,7 +36,7 @@ class AdminEditPostController extends AbstractController
         return $this->json($produit);
     }
     /**
-     * @Route("/api/admin/edit/view/{id}", name="api_admin_edit_view", methods={"POST","GET"})
+     * @Route("/api/admin/edit/view/{id}", name="api_admin_edit_view", methods={"GET"})
      */
     public function getEditContent(int $id,  ProduitsRepository $produit)
     {
@@ -44,7 +44,7 @@ class AdminEditPostController extends AbstractController
         return $this->json($produit->find($id));
     }
     /**
-     * @Route("/api/admin/edit/{id}", name="api_admin_edit", methods={"POST","GET"})
+     * @Route("/api/admin/edit/{id}", name="api_admin_edit", methods={"POST"})
      */
     public function edit(int $id, ProduitsRepository $produitRepository, Request $request, EntityManagerInterface $manager, CategoryRepository $categoryRepository)
     {
@@ -73,7 +73,7 @@ class AdminEditPostController extends AbstractController
         return $this->json($produit);
     }
     /**
-     * @Route("/api/admin/delete/{id}", name="api_admin_delete", methods={"POST","GET"} )
+     * @Route("/api/admin/delete/{id}", name="api_admin_delete", methods={"GET"} )
      */
     public function delete(int $id, ProduitsRepository $produit, EntityManagerInterface $manager)
     {

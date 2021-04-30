@@ -18,7 +18,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/register", name="register", methods={"POST","GET"})
+     * @Route("/register", name="register", methods={"POST"})
      */
     public function index(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder, ValidatorInterface $validator, RoleRepository $roleRepository): response
     {
@@ -34,11 +34,11 @@ class UserController extends AbstractController
         $errors = $validator->validate($user);
 
         if (count($errors) > 0) {
-            /*
-         * Uses a __toString method on the $errors variable which is a
-         * ConstraintViolationList object. This gives us a nice string
-         * for debugging.
-         */
+            /** 
+             * Uses a __toString method on the $errors variable which is a
+             * ConstraintViolationList object. This gives us a nice string
+             * for debugging.
+             */
             $errorsString = (string) $errors;
             return $this->json(['errors' => $errors], 409);
         }
@@ -47,11 +47,10 @@ class UserController extends AbstractController
         return $this->json($body['firstname']);
     }
     /**
-     * @Route("/api/login_check", name="api_login_check", methods={"POST","GET"})
+     * @Route("/api/login_check", name="api_login_check", methods={"POST"})
      */
     public function loginCheck(): JsonResponse
     {
-
         $user = $this->getUser();
         return new JsonResponse($user);
     }
