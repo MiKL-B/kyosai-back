@@ -24,9 +24,10 @@ class UserController extends AbstractController
     {
         $user = new Users();
         $body = json_decode($request->getContent(), true);
-        $user->setNom($body["firstname"]);
-        $user->setEmail($body["email"]);
-        $user->setPassword($body["mdp"]);
+        $user->setNom(htmlspecialchars($body["firstname"]));
+
+        $user->setEmail(htmlspecialchars($body["email"]));
+        $user->setPassword(htmlspecialchars($body["mdp"]));
         $monRole = $roleRepository->findOneBy(['name' => 'ROLE_USER']);
         $user->addRole($monRole);
         $hash = $encoder->encodePassword($user, $user->getPassword());
