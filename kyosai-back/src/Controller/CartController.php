@@ -19,7 +19,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CartController extends AbstractController
 {
     /**
-     * @Route("/panier", name="cart_index", methods={"POST","GET"})
+     * @Route("/panier", name="cart_index", methods={"GET"})
      */
     public function index(UsersRepository $userRepository, Request $request)
     {
@@ -28,9 +28,8 @@ class CartController extends AbstractController
         $tokenPayload = base64_decode($tokenParts[1]);
         $jwtHeader = json_decode($tokenHeader);
         $jwtPayload = json_decode($tokenPayload);
-        //ajouter produit au panier a l'utilisateur
         $user = $userRepository->findOneBy(['email' => $jwtPayload->username]);
-
+        //ajouter produit au panier a l'utilisateur
         return $this->json($user->getCarts());
     }
 
@@ -56,7 +55,6 @@ class CartController extends AbstractController
         $produit = $produitsRepository->findOneBy(['id' => $id]);
 
         $result =  $cartRepository->count(['produit' => $produitEntity, 'user' => $user]);
-
 
         $currentCart = $cartRepository->findOneBy(['produit' => $produitEntity, 'user' => $user]);
         if ($result == 0) {
