@@ -1,0 +1,64 @@
+\hypertarget{class_app_1_1_controller_1_1_user_controller}{}\section{User\+Controller Class Reference}
+\label{class_app_1_1_controller_1_1_user_controller}\index{User\+Controller@{User\+Controller}}
+Inheritance diagram for User\+Controller\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_app_1_1_controller_1_1_user_controller}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_controller_1_1_user_controller_a18d2b8ef36c20c54ff76c6ce68534409}{index}} (Request \$request, Entity\+Manager\+Interface \$manager, User\+Password\+Encoder\+Interface \$encoder, Validator\+Interface \$validator, \mbox{\hyperlink{class_app_1_1_repository_1_1_role_repository}{Role\+Repository}} \$role\+Repository)
+\item 
+\mbox{\hyperlink{class_app_1_1_controller_1_1_user_controller_affba077e60f5a9a813c6880603500ec5}{login\+Check}} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Manages user registration and login \begin{DoxyAuthor}{Author}
+Michael B\+E\+C\+Q\+U\+ER 
+\end{DoxyAuthor}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_app_1_1_controller_1_1_user_controller_a18d2b8ef36c20c54ff76c6ce68534409}\label{class_app_1_1_controller_1_1_user_controller_a18d2b8ef36c20c54ff76c6ce68534409}} 
+\index{App\+::\+Controller\+::\+User\+Controller@{App\+::\+Controller\+::\+User\+Controller}!index@{index}}
+\index{index@{index}!App\+::\+Controller\+::\+User\+Controller@{App\+::\+Controller\+::\+User\+Controller}}
+\subsubsection{\texorpdfstring{index()}{index()}}
+{\footnotesize\ttfamily index (\begin{DoxyParamCaption}\item[{Request}]{\$request,  }\item[{Entity\+Manager\+Interface}]{\$manager,  }\item[{User\+Password\+Encoder\+Interface}]{\$encoder,  }\item[{Validator\+Interface}]{\$validator,  }\item[{\mbox{\hyperlink{class_app_1_1_repository_1_1_role_repository}{Role\+Repository}}}]{\$role\+Repository }\end{DoxyParamCaption})}
+
+(\char`\"{}/register\char`\"{}, name=\char`\"{}register\char`\"{}, methods=\{\char`\"{}\+P\+O\+S\+T\char`\"{}\}) Register a user in the database
+
+
+\begin{DoxyParams}[1]{Parameters}
+mixed & {\em \$request} & \\
+\hline
+mixed & {\em \$manager} & \\
+\hline
+mixed & {\em \$encoder} & \\
+\hline
+mixed & {\em \$validator} & \\
+\hline
+mixed & {\em \$role\+Repository} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+response 
+\end{DoxyReturn}
+Uses a \+\_\+\+\_\+to\+String method on the \$errors variable which is a Constraint\+Violation\+List object. This gives us a nice string for debugging.\mbox{\Hypertarget{class_app_1_1_controller_1_1_user_controller_affba077e60f5a9a813c6880603500ec5}\label{class_app_1_1_controller_1_1_user_controller_affba077e60f5a9a813c6880603500ec5}} 
+\index{App\+::\+Controller\+::\+User\+Controller@{App\+::\+Controller\+::\+User\+Controller}!login\+Check@{login\+Check}}
+\index{login\+Check@{login\+Check}!App\+::\+Controller\+::\+User\+Controller@{App\+::\+Controller\+::\+User\+Controller}}
+\subsubsection{\texorpdfstring{login\+Check()}{loginCheck()}}
+{\footnotesize\ttfamily login\+Check (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+(\char`\"{}/api/login\+\_\+check\char`\"{}, name=\char`\"{}api\+\_\+login\+\_\+check\char`\"{}, methods=\{\char`\"{}\+P\+O\+S\+T\char`\"{}\}) Enable to check if user is connected to database
+
+\begin{DoxyReturn}{Returns}
+Json\+Response 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Controller/\mbox{\hyperlink{_user_controller_8php}{User\+Controller.\+php}}\end{DoxyCompactItemize}

@@ -1,0 +1,115 @@
+\hypertarget{class_app_1_1_controller_1_1_admin_edit_post_controller}{}\section{Admin\+Edit\+Post\+Controller Class Reference}
+\label{class_app_1_1_controller_1_1_admin_edit_post_controller}\index{Admin\+Edit\+Post\+Controller@{Admin\+Edit\+Post\+Controller}}
+Inheritance diagram for Admin\+Edit\+Post\+Controller\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_app_1_1_controller_1_1_admin_edit_post_controller}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_controller_1_1_admin_edit_post_controller_a125dd362544d79e6056e4b57cb43135b}{index}} (Request \$request, Entity\+Manager\+Interface \$manager, \mbox{\hyperlink{class_app_1_1_repository_1_1_category_repository}{Category\+Repository}} \$category\+Repository)
+\item 
+\mbox{\hyperlink{class_app_1_1_controller_1_1_admin_edit_post_controller_ab65e87c7f80014f2b687f789eba6d3b4}{get\+Edit\+Content}} (int \$id, \mbox{\hyperlink{class_app_1_1_repository_1_1_produits_repository}{Produits\+Repository}} \$produit)
+\item 
+\mbox{\hyperlink{class_app_1_1_controller_1_1_admin_edit_post_controller_a0578b6f3be8a0c7857aa19c7e343db4c}{edit}} (int \$id, \mbox{\hyperlink{class_app_1_1_repository_1_1_produits_repository}{Produits\+Repository}} \$produit\+Repository, Request \$request, Entity\+Manager\+Interface \$manager, \mbox{\hyperlink{class_app_1_1_repository_1_1_category_repository}{Category\+Repository}} \$category\+Repository)
+\item 
+\mbox{\hyperlink{class_app_1_1_controller_1_1_admin_edit_post_controller_af982d7c8be1c44eb293d63ab7920592b}{delete}} (int \$id, \mbox{\hyperlink{class_app_1_1_repository_1_1_produits_repository}{Produits\+Repository}} \$produit, Entity\+Manager\+Interface \$manager)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Manages the operations to be performed on a product from the administration page \begin{DoxyAuthor}{Author}
+Michael B\+E\+C\+Q\+U\+ER 
+\end{DoxyAuthor}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_app_1_1_controller_1_1_admin_edit_post_controller_af982d7c8be1c44eb293d63ab7920592b}\label{class_app_1_1_controller_1_1_admin_edit_post_controller_af982d7c8be1c44eb293d63ab7920592b}} 
+\index{App\+::\+Controller\+::\+Admin\+Edit\+Post\+Controller@{App\+::\+Controller\+::\+Admin\+Edit\+Post\+Controller}!delete@{delete}}
+\index{delete@{delete}!App\+::\+Controller\+::\+Admin\+Edit\+Post\+Controller@{App\+::\+Controller\+::\+Admin\+Edit\+Post\+Controller}}
+\subsubsection{\texorpdfstring{delete()}{delete()}}
+{\footnotesize\ttfamily delete (\begin{DoxyParamCaption}\item[{int}]{\$id,  }\item[{\mbox{\hyperlink{class_app_1_1_repository_1_1_produits_repository}{Produits\+Repository}}}]{\$produit,  }\item[{Entity\+Manager\+Interface}]{\$manager }\end{DoxyParamCaption})}
+
+(\char`\"{}/api/admin/delete/\{id\}\char`\"{}, name=\char`\"{}api\+\_\+admin\+\_\+delete\char`\"{}, methods=\{\char`\"{}\+G\+E\+T\char`\"{}\} ) Delete the product
+
+
+\begin{DoxyParams}[1]{Parameters}
+mixed & {\em \$id} & \\
+\hline
+mixed & {\em \$produit} & \\
+\hline
+mixed & {\em \$manager} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_app_1_1_controller_1_1_admin_edit_post_controller_a0578b6f3be8a0c7857aa19c7e343db4c}\label{class_app_1_1_controller_1_1_admin_edit_post_controller_a0578b6f3be8a0c7857aa19c7e343db4c}} 
+\index{App\+::\+Controller\+::\+Admin\+Edit\+Post\+Controller@{App\+::\+Controller\+::\+Admin\+Edit\+Post\+Controller}!edit@{edit}}
+\index{edit@{edit}!App\+::\+Controller\+::\+Admin\+Edit\+Post\+Controller@{App\+::\+Controller\+::\+Admin\+Edit\+Post\+Controller}}
+\subsubsection{\texorpdfstring{edit()}{edit()}}
+{\footnotesize\ttfamily edit (\begin{DoxyParamCaption}\item[{int}]{\$id,  }\item[{\mbox{\hyperlink{class_app_1_1_repository_1_1_produits_repository}{Produits\+Repository}}}]{\$produit\+Repository,  }\item[{Request}]{\$request,  }\item[{Entity\+Manager\+Interface}]{\$manager,  }\item[{\mbox{\hyperlink{class_app_1_1_repository_1_1_category_repository}{Category\+Repository}}}]{\$category\+Repository }\end{DoxyParamCaption})}
+
+(\char`\"{}/api/admin/edit/\{id\}\char`\"{}, name=\char`\"{}api\+\_\+admin\+\_\+edit\char`\"{}, methods=\{\char`\"{}\+P\+O\+S\+T\char`\"{}\}) Modify the product
+
+
+\begin{DoxyParams}[1]{Parameters}
+integer & {\em \$id} & \\
+\hline
+mixed & {\em \$produit\+Repository} & \\
+\hline
+mixed & {\em \$request} & \\
+\hline
+mixed & {\em \$manager} & \\
+\hline
+mixed & {\em \$category\+Repository} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_app_1_1_controller_1_1_admin_edit_post_controller_ab65e87c7f80014f2b687f789eba6d3b4}\label{class_app_1_1_controller_1_1_admin_edit_post_controller_ab65e87c7f80014f2b687f789eba6d3b4}} 
+\index{App\+::\+Controller\+::\+Admin\+Edit\+Post\+Controller@{App\+::\+Controller\+::\+Admin\+Edit\+Post\+Controller}!get\+Edit\+Content@{get\+Edit\+Content}}
+\index{get\+Edit\+Content@{get\+Edit\+Content}!App\+::\+Controller\+::\+Admin\+Edit\+Post\+Controller@{App\+::\+Controller\+::\+Admin\+Edit\+Post\+Controller}}
+\subsubsection{\texorpdfstring{get\+Edit\+Content()}{getEditContent()}}
+{\footnotesize\ttfamily get\+Edit\+Content (\begin{DoxyParamCaption}\item[{int}]{\$id,  }\item[{\mbox{\hyperlink{class_app_1_1_repository_1_1_produits_repository}{Produits\+Repository}}}]{\$produit }\end{DoxyParamCaption})}
+
+(\char`\"{}/api/admin/edit/view/\{id\}\char`\"{}, name=\char`\"{}api\+\_\+admin\+\_\+edit\+\_\+view\char`\"{}, methods=\{\char`\"{}\+G\+E\+T\char`\"{}\}) Display the product
+
+
+\begin{DoxyParams}[1]{Parameters}
+integer & {\em \$id} & \\
+\hline
+mixed & {\em \$produit} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_app_1_1_controller_1_1_admin_edit_post_controller_a125dd362544d79e6056e4b57cb43135b}\label{class_app_1_1_controller_1_1_admin_edit_post_controller_a125dd362544d79e6056e4b57cb43135b}} 
+\index{App\+::\+Controller\+::\+Admin\+Edit\+Post\+Controller@{App\+::\+Controller\+::\+Admin\+Edit\+Post\+Controller}!index@{index}}
+\index{index@{index}!App\+::\+Controller\+::\+Admin\+Edit\+Post\+Controller@{App\+::\+Controller\+::\+Admin\+Edit\+Post\+Controller}}
+\subsubsection{\texorpdfstring{index()}{index()}}
+{\footnotesize\ttfamily index (\begin{DoxyParamCaption}\item[{Request}]{\$request,  }\item[{Entity\+Manager\+Interface}]{\$manager,  }\item[{\mbox{\hyperlink{class_app_1_1_repository_1_1_category_repository}{Category\+Repository}}}]{\$category\+Repository }\end{DoxyParamCaption})}
+
+(\char`\"{}/api/admin\char`\"{}, name=\char`\"{}api\+\_\+admin\+\_\+index\char`\"{}, methods=\{\char`\"{}\+P\+O\+S\+T\char`\"{}\}) Add a product to the administration page
+
+
+\begin{DoxyParams}[1]{Parameters}
+mixed & {\em \$request} & \\
+\hline
+mixed & {\em \$manager} & \\
+\hline
+mixed & {\em \$category\+Repository} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Response 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Controller/\mbox{\hyperlink{_admin_edit_post_controller_8php}{Admin\+Edit\+Post\+Controller.\+php}}\end{DoxyCompactItemize}

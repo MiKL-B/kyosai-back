@@ -14,11 +14,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-
+/**
+ * Manages user registration and login
+ * @author Michael BECQUER
+ */
 class UserController extends AbstractController
 {
     /**
      * @Route("/register", name="register", methods={"POST"})
+     */
+    /**
+     * Register a user in the database
+     *
+     * @param  mixed $request
+     * @param  mixed $manager
+     * @param  mixed $encoder
+     * @param  mixed $validator
+     * @param  mixed $roleRepository
+     * @return response
      */
     public function index(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder, ValidatorInterface $validator, RoleRepository $roleRepository): response
     {
@@ -49,6 +62,11 @@ class UserController extends AbstractController
     }
     /**
      * @Route("/api/login_check", name="api_login_check", methods={"POST"})
+     */
+    /**
+     * Enable to check if user is connected to database
+     *
+     * @return JsonResponse
      */
     public function loginCheck(): JsonResponse
     {

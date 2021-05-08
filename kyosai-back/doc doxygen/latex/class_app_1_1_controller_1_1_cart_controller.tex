@@ -1,0 +1,95 @@
+\hypertarget{class_app_1_1_controller_1_1_cart_controller}{}\section{Cart\+Controller Class Reference}
+\label{class_app_1_1_controller_1_1_cart_controller}\index{Cart\+Controller@{Cart\+Controller}}
+Inheritance diagram for Cart\+Controller\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_app_1_1_controller_1_1_cart_controller}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_controller_1_1_cart_controller_acb4819cf06207b3c628edfa1a5af6a6f}{index}} (\mbox{\hyperlink{class_app_1_1_repository_1_1_users_repository}{Users\+Repository}} \$user\+Repository, Request \$request)
+\item 
+\mbox{\hyperlink{class_app_1_1_controller_1_1_cart_controller_ac217678855013811414d24f84ad9b57b}{add}} (Request \$request, \mbox{\hyperlink{class_app_1_1_repository_1_1_users_repository}{Users\+Repository}} \$user\+Repository, \mbox{\hyperlink{class_app_1_1_repository_1_1_produits_repository}{Produits\+Repository}} \$produits\+Repository, Entity\+Manager\+Interface \$manager, \mbox{\hyperlink{class_app_1_1_entity_1_1_produits}{Produits}} \$produit\+Entity, \mbox{\hyperlink{class_app_1_1_repository_1_1_cart_repository}{Cart\+Repository}} \$cart\+Repository)
+\item 
+\mbox{\hyperlink{class_app_1_1_controller_1_1_cart_controller_a0a4f4fa16921c0100dcd9d64104eafdb}{delete}} (int \$id, Entity\+Manager\+Interface \$manager, \mbox{\hyperlink{class_app_1_1_repository_1_1_cart_repository}{Cart\+Repository}} \$cart\+Repository)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Manages the various cart operations \begin{DoxyAuthor}{Author}
+Michael B\+E\+C\+Q\+U\+ER 
+\end{DoxyAuthor}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_app_1_1_controller_1_1_cart_controller_ac217678855013811414d24f84ad9b57b}\label{class_app_1_1_controller_1_1_cart_controller_ac217678855013811414d24f84ad9b57b}} 
+\index{App\+::\+Controller\+::\+Cart\+Controller@{App\+::\+Controller\+::\+Cart\+Controller}!add@{add}}
+\index{add@{add}!App\+::\+Controller\+::\+Cart\+Controller@{App\+::\+Controller\+::\+Cart\+Controller}}
+\subsubsection{\texorpdfstring{add()}{add()}}
+{\footnotesize\ttfamily add (\begin{DoxyParamCaption}\item[{Request}]{\$request,  }\item[{\mbox{\hyperlink{class_app_1_1_repository_1_1_users_repository}{Users\+Repository}}}]{\$user\+Repository,  }\item[{\mbox{\hyperlink{class_app_1_1_repository_1_1_produits_repository}{Produits\+Repository}}}]{\$produits\+Repository,  }\item[{Entity\+Manager\+Interface}]{\$manager,  }\item[{\mbox{\hyperlink{class_app_1_1_entity_1_1_produits}{Produits}}}]{\$produit\+Entity,  }\item[{\mbox{\hyperlink{class_app_1_1_repository_1_1_cart_repository}{Cart\+Repository}}}]{\$cart\+Repository }\end{DoxyParamCaption})}
+
+(\char`\"{}/add/cart/\{id\}\char`\"{}, name=\char`\"{}add\+\_\+cart\char`\"{}, methods=\{\char`\"{}\+G\+E\+T\char`\"{}\}) Add a product to the user\textquotesingle{}s cart
+
+
+\begin{DoxyParams}[1]{Parameters}
+mixed & {\em \$request} & \\
+\hline
+mixed & {\em \$user\+Repository} & \\
+\hline
+mixed & {\em \$produits\+Repository} & \\
+\hline
+mixed & {\em \$manager} & \\
+\hline
+mixed & {\em \$produit\+Entity} & \\
+\hline
+mixed & {\em \$cart\+Repository} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_app_1_1_controller_1_1_cart_controller_a0a4f4fa16921c0100dcd9d64104eafdb}\label{class_app_1_1_controller_1_1_cart_controller_a0a4f4fa16921c0100dcd9d64104eafdb}} 
+\index{App\+::\+Controller\+::\+Cart\+Controller@{App\+::\+Controller\+::\+Cart\+Controller}!delete@{delete}}
+\index{delete@{delete}!App\+::\+Controller\+::\+Cart\+Controller@{App\+::\+Controller\+::\+Cart\+Controller}}
+\subsubsection{\texorpdfstring{delete()}{delete()}}
+{\footnotesize\ttfamily delete (\begin{DoxyParamCaption}\item[{int}]{\$id,  }\item[{Entity\+Manager\+Interface}]{\$manager,  }\item[{\mbox{\hyperlink{class_app_1_1_repository_1_1_cart_repository}{Cart\+Repository}}}]{\$cart\+Repository }\end{DoxyParamCaption})}
+
+(\char`\"{}/delete/cart/\{id\}\char`\"{}, name=\char`\"{}delete\+\_\+cart\char`\"{}, methods=\{\char`\"{}\+D\+E\+L\+E\+T\+E\char`\"{}\}) Delete a product from the user\textquotesingle{}s cart
+
+
+\begin{DoxyParams}[1]{Parameters}
+integer & {\em \$id} & \\
+\hline
+mixed & {\em \$manager} & \\
+\hline
+mixed & {\em \$cart\+Repository} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_app_1_1_controller_1_1_cart_controller_acb4819cf06207b3c628edfa1a5af6a6f}\label{class_app_1_1_controller_1_1_cart_controller_acb4819cf06207b3c628edfa1a5af6a6f}} 
+\index{App\+::\+Controller\+::\+Cart\+Controller@{App\+::\+Controller\+::\+Cart\+Controller}!index@{index}}
+\index{index@{index}!App\+::\+Controller\+::\+Cart\+Controller@{App\+::\+Controller\+::\+Cart\+Controller}}
+\subsubsection{\texorpdfstring{index()}{index()}}
+{\footnotesize\ttfamily index (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_app_1_1_repository_1_1_users_repository}{Users\+Repository}}}]{\$user\+Repository,  }\item[{Request}]{\$request }\end{DoxyParamCaption})}
+
+(\char`\"{}/panier\char`\"{}, name=\char`\"{}cart\+\_\+index\char`\"{}, methods=\{\char`\"{}\+G\+E\+T\char`\"{}\}) Retrieves the user\textquotesingle{}s cart
+
+
+\begin{DoxyParams}[1]{Parameters}
+mixed & {\em \$user\+Repository} & \\
+\hline
+mixed & {\em \$request} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Controller/\mbox{\hyperlink{_cart_controller_8php}{Cart\+Controller.\+php}}\end{DoxyCompactItemize}

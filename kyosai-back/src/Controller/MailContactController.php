@@ -10,10 +10,21 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+/**
+ * Manages the sending of mail
+ * @author Michael BECQUER
+ */
 class MailContactController extends AbstractController
 {
     /**
      * @Route("/mail/contact", name="mail_contact")
+     */
+    /**
+     * Sends a mail to the association
+     *
+     * @param  mixed $request
+     * @param  mixed $mailer
+     * @return void
      */
     public function index(Request $request, MailerInterface $mailer)
     {
