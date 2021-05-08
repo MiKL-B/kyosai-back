@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 class CartTest extends WebTestCase
 {
 
-    public function testTestsAreWorking()
+    public function testLoginUser()
     {
         $client = static::createClient();
         $userRepository = static::$container->get(UsersRepository::class);
@@ -17,14 +17,11 @@ class CartTest extends WebTestCase
         $testUser = $userRepository->findOneByEmail('admin@kyosai.fr');
         // simuler qu'un utilisateur de test est connecté 
         $client->loginUser($testUser);
-        // dd($testUser);
-        //login page
+        //page connexion
         $client->request('GET', '/api/login_check');
         $this->assertResponseIsSuccessful();
-        // $client->request('GET', '/shop');
-        // $response = $client->getResponse();
-        // $this->assertEquals(200, $response->getStatusCode());
-        // $this->assertCount(9, json_decode($response->getContent()));
+
     }
 }
+
 //php bin/phpunit tests/CartTest
