@@ -19,13 +19,13 @@ class MailContactController extends AbstractController
     /**
      * @Route("/mail/contact", name="mail_contact")
      */
-    /**
-     * Sends a mail to the association
-     *
-     * @param  mixed $request
-     * @param  mixed $mailer
-     * @return void
-     */
+    // /**
+    //  * Sends a mail to the association
+    //  *
+    //  * @param  mixed $request
+    //  * @param  mixed $mailer
+    //  * @return void
+    //  */
     public function index(Request $request, MailerInterface $mailer)
     {
         $body = json_decode($request->getContent(), true);

@@ -23,16 +23,16 @@ class UserController extends AbstractController
     /**
      * @Route("/register", name="register", methods={"POST"})
      */
-    /**
-     * Register a user in the database
-     *
-     * @param  mixed $request
-     * @param  mixed $manager
-     * @param  mixed $encoder
-     * @param  mixed $validator
-     * @param  mixed $roleRepository
-     * @return response
-     */
+    // /**
+    //  * Register a user in the database
+    //  *
+    //  * @param  mixed $request
+    //  * @param  mixed $manager
+    //  * @param  mixed $encoder
+    //  * @param  mixed $validator
+    //  * @param  mixed $roleRepository
+    //  * @return response
+    //  */
     public function index(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder, ValidatorInterface $validator, RoleRepository $roleRepository): response
     {
         $user = new Users();
@@ -63,11 +63,11 @@ class UserController extends AbstractController
     /**
      * @Route("/api/login_check", name="api_login_check", methods={"POST"})
      */
-    /**
-     * Enable to check if user is connected to database
-     *
-     * @return JsonResponse
-     */
+    // /**
+    //  * Enable to check if user is connected to database
+    //  *
+    //  * @return JsonResponse
+    //  */
     public function loginCheck(): JsonResponse
     {
         $user = $this->getUser();

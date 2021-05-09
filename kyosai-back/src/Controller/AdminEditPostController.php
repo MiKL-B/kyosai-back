@@ -21,14 +21,14 @@ class AdminEditPostController extends AbstractController
     /**
      * @Route("/api/admin", name="api_admin_index", methods={"POST"})
      */
-    /**
-     * Add a product to the administration page
-     *
-     * @param  mixed $request
-     * @param  mixed $manager
-     * @param  mixed $categoryRepository
-     * @return Response
-     */
+    // /**
+    //  * Add a product to the administration page
+    //  *
+    //  * @param  mixed $request
+    //  * @param  mixed $manager
+    //  * @param  mixed $categoryRepository
+    //  * @return Response
+    //  */
     public function index(Request $request, EntityManagerInterface $manager, CategoryRepository $categoryRepository): Response
     {
         $produit = new Produits();
@@ -50,13 +50,13 @@ class AdminEditPostController extends AbstractController
     /**
      * @Route("/api/admin/edit/view/{id}", name="api_admin_edit_view", methods={"GET"})
      */
-    /**
-     * Display the product 
-     *
-     * @param  integer $id
-     * @param  mixed $produit
-     * @return void
-     */
+    // /**
+    //  * Display the product 
+    //  *
+    //  * @param  integer $id
+    //  * @param  mixed $produit
+    //  * @return void
+    //  */
     public function getEditContent(int $id,  ProduitsRepository $produit)
     {
 
@@ -65,16 +65,16 @@ class AdminEditPostController extends AbstractController
     /**
      * @Route("/api/admin/edit/{id}", name="api_admin_edit", methods={"POST"})
      */
-    /**
-     * Modify the product
-     *
-     * @param  integer $id
-     * @param  mixed $produitRepository
-     * @param  mixed $request
-     * @param  mixed $manager
-     * @param  mixed $categoryRepository
-     * @return void
-     */
+    // /**
+    //  * Modify the product
+    //  *
+    //  * @param  integer $id
+    //  * @param  mixed $produitRepository
+    //  * @param  mixed $request
+    //  * @param  mixed $manager
+    //  * @param  mixed $categoryRepository
+    //  * @return void
+    //  */
     public function edit(int $id, ProduitsRepository $produitRepository, Request $request, EntityManagerInterface $manager, CategoryRepository $categoryRepository)
     {
 
@@ -104,14 +104,14 @@ class AdminEditPostController extends AbstractController
     /**
      * @Route("/api/admin/delete/{id}", name="api_admin_delete", methods={"GET"} )
      */
-    /**
-     * Delete the product
-     *
-     * @param  mixed $id
-     * @param  mixed $produit
-     * @param  mixed $manager
-     * @return void
-     */
+    // /**
+    //  * Delete the product
+    //  *
+    //  * @param  mixed $id
+    //  * @param  mixed $produit
+    //  * @param  mixed $manager
+    //  * @return void
+    //  */
     public function delete(int $id, ProduitsRepository $produit, EntityManagerInterface $manager)
     {
         $manager->remove($produit->find($id));

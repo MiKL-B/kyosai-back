@@ -25,13 +25,13 @@ class CartController extends AbstractController
     /**
      * @Route("/panier", name="cart_index", methods={"GET"})
      */
-    /**
-     * Retrieves the user's cart
-     *
-     * @param  mixed $userRepository
-     * @param  mixed $request
-     * @return void
-     */
+    // /**
+    //  * Retrieves the user's cart
+    //  *
+    //  * @param  mixed $userRepository
+    //  * @param  mixed $request
+    //  * @return void
+    //  */
     public function index(UsersRepository $userRepository, Request $request)
     {
         $tokenParts = explode(".", substr($request->headers->get('Authorization'), 7));
@@ -47,17 +47,17 @@ class CartController extends AbstractController
     /**
      *@Route("/add/cart/{id}", name="add_cart", methods={"GET"})
      */
-    /**
-     * Add a product to the user's cart
-     *
-     * @param  mixed $request
-     * @param  mixed $userRepository
-     * @param  mixed $produitsRepository
-     * @param  mixed $manager
-     * @param  mixed $produitEntity
-     * @param  mixed $cartRepository
-     * @return void
-     */
+    // /**
+    //  * Add a product to the user's cart
+    //  *
+    //  * @param  mixed $request
+    //  * @param  mixed $userRepository
+    //  * @param  mixed $produitsRepository
+    //  * @param  mixed $manager
+    //  * @param  mixed $produitEntity
+    //  * @param  mixed $cartRepository
+    //  * @return void
+    //  */
     public function add(Request $request, UsersRepository $userRepository, ProduitsRepository $produitsRepository, EntityManagerInterface $manager, Produits $produitEntity, CartRepository $cartRepository)
     {
         //decode token
@@ -100,14 +100,14 @@ class CartController extends AbstractController
     /**
      *@Route("/delete/cart/{id}", name="delete_cart", methods={"DELETE"})
      */
-    /**
-     * Delete a product from the user's cart
-     *
-     * @param  integer $id
-     * @param  mixed $manager
-     * @param  mixed $cartRepository
-     * @return void
-     */
+    // /**
+    //  * Delete a product from the user's cart
+    //  *
+    //  * @param  integer $id
+    //  * @param  mixed $manager
+    //  * @param  mixed $cartRepository
+    //  * @return void
+    //  */
     public function delete(int $id, EntityManagerInterface $manager, CartRepository $cartRepository)
     {
         $cart = $cartRepository->findOneBy(['id' => $id]);

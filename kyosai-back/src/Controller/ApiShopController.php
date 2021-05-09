@@ -14,28 +14,30 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  */
 class ApiShopController extends AbstractController
 {
+
+    // /**
+    //  * Retrieves products from the database
+    //  *
+    //  * @param  mixed $produitsRepository
+    //  * @return response
+    //  */
     /**
      * @Route("/shop", name="shop_index", methods={"GET"})
-     */
-    /**
-     * Retrieves products from the database
-     *
-     * @param  mixed $produitsRepository
-     * @return response
      */
     public function index(ProduitsRepository $produitsRepository): response
     {
         return $this->json($produitsRepository->findAll(), 200, []);
     }
 
+
+    // /**
+    //  * Retrieves the list of product categories
+    //  *
+    //  * @param  mixed $categoryRepository
+    //  * @return response
+    //  */
     /**
      * @Route("/category/list", name="category_list", methods={"GET"})
-     */
-    /**
-     * Retrieves the list of product categories
-     *
-     * @param  mixed $categoryRepository
-     * @return response
      */
     public function categoryList(CategoryRepository $categoryRepository): response
     {

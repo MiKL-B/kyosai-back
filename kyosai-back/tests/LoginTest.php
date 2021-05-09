@@ -6,7 +6,7 @@ use App\Repository\UsersRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class CartTest extends WebTestCase
+class LoginTest extends WebTestCase
 {
 
     public function testLoginUser()
